@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ note.title }}{% endblock %}
+{% block content %}
+<h2>{{ note.title }}</h2>
+<p>{{ note.content|linebreaks }}</p>
+<p>{% if note.is_pinned %}📌 Pinned{% endif %}</p>
+<form method="post" action="{% url 'note_delete' note.id %}">{% csrf_token %}
+  <a class="btn" href="{% url 'note_update' note.id %}">Edit</a>
+  <button class="btn danger" type="submit">Delete</button>
+</form>
+<p><a href="{% url 'note_list' %}">Back</a></p>
+{% endblock %}

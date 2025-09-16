@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Import Notes{% endblock %}
+{% block content %}
+<h2>Import Notes (CSV)</h2>
+<form method="post" enctype="multipart/form-data" aria-label="Import notes from CSV">{% csrf_token %}
+  <div class="mb-3">
+    <input class="form-control" type="file" name="file" accept=".csv" required>
+  </div>
+  <button class="btn btn-primary" type="submit">Import</button>
+  <a class="btn btn-link" href="{% url 'note_list' %}">Cancel</a>
+</form>
+{% endblock %}
