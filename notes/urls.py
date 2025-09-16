@@ -6,6 +6,7 @@ router = DefaultRouter()
 router.register(r'api/notes', views.NoteViewSet, basename='api-notes')
 router.register(r'api/tags', views.TagViewSet, basename='api-tags')
 urlpatterns = [
+    path('accounts/signup/', views.signup, name='signup'),
     path('', views.note_list, name='note_list'),
     path('new/', views.note_create, name='note_create'),
     path('<int:pk>/', views.note_detail, name='note_detail'),

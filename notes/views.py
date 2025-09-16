@@ -8,6 +8,20 @@ from rest_framework import viewsets, permissions
 from .serializers import NoteSerializer, TagSerializer
 import csv
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login as auth_login
+
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect("note_list")
+    form = UserCreationForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        user = form.save()
+        auth_login(request, user)
+        messages.success(request, "Account created successfully")
+        return redirect("note_list")
+    return render(request, "signup.html", { "form": form })
+
 
 @login_required
 def note_list(request):
